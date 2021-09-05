@@ -19,6 +19,8 @@ xtest, ytest = data['test']
 y /= 4
 ytest /= 4
 
+tf.print(x.shape,xtest.shape)
+
 
 vectorizer = TextVectorization(max_tokens=5000)
 vectorizer.adapt(x[:10000])
@@ -30,8 +32,16 @@ model = Sequential([
     Dense(1, activation="sigmoid")
 ])
 
+
+def mod_mse(y_true, y_pred):
+    return tf.reduce_mean((y_true-y_pred)**2/(1-(y_true-y_pred)**2))
+
+def mod_acc(y_true,y_pred):
+    return tf.reduce_mean(1-(y_true-y_pred)**2)
+
+
 model.compile(optimizer=Adam(learning_rate=learning_rate),
-              loss="mse", metrics=["accuracy"])
+              loss=mod_mse, metrics=[mod_acc])
 
 model.fit(x, y, batch_size=batch_size, epochs=5, shuffle=True, callbacks=[
           tf.keras.callbacks.TensorBoard(log_dir="tf_logs/fit/"+datetime.now().strftime("%Y%m%d-%H%M%S"), update_freq=10)])

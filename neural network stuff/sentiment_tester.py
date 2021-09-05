@@ -1,6 +1,6 @@
 import tensorflow as tf
 
-model = tf.keras.models.load_model("sentiment_model_mse")
+model = tf.keras.models.load_model("sentiment_model_binary_crossentropy")
 
 def test(text):
     tf.print("sentiment value: ",model(tf.convert_to_tensor([text]))[0,0])

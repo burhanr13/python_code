@@ -1,8 +1,18 @@
-X:132
-T:Scirn of Dun
-Z: id:dc-jig-152
-M:6/8
+X:21
+T:Marrie Wrest
+Z: id:dc-ocarolan-3
+M:3/4
 L:1/8
-K:G Major
-z|!
-DGG Bed|cAF EDB,|G,B,D GB,A,|DED EGA|BdF EDE:|!
+K:E Minor
+ef|gf ga ba|g2 gf ge|d2 g2 f2|g2 fg af|g2 f2 c2|!
+d3 e dg|f2 e2 d2|B3 A Bc|!
+d2 d2 d2|B2 c2 d2|e4 f2|g4 fe|e2 e2 d2|d4 fe|d4 A2|B4 G2|A4 B2|A4 fan
+Z: id:dc-reel-42
+M:C
+L:1/8
+K:E Minor
+E|DBBA B2AB|dBAB G2B,D|A,DB,2 DB,A,2|B,EE2 FEDE|FBBA B3:|!
+AFF2 ABdf|eBB2 fefe|dece afeA|Bcde f2ed|!
+efed BcdB|BAGB ABde|faeg fddA|!
+Bee BedB|F2AF DFAB|cBBA BAFA|!
+E2BE BEEG|Bdef gfed|cdef gfec|dffe d2|]!

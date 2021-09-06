@@ -6,6 +6,7 @@ from tensorflow.keras.optimizers import Adam
 
 from datetime import datetime
 import random
+import pickle
 
 batch_size = 1000
 embedding_size = 256
@@ -19,11 +20,10 @@ xtest, ytest = data['test']
 y /= 4
 ytest /= 4
 
-tf.print(x.shape,xtest.shape)
+with open("vocabulary.pkl", 'rb') as f:
+    vocab = pickle.load(f)
 
-
-vectorizer = TextVectorization(max_tokens=5000)
-vectorizer.adapt(x[:10000])
+vectorizer = TextVectorization(vocabulary=vocab)
 
 model = Sequential([
     vectorizer,
@@ -36,12 +36,12 @@ model = Sequential([
 def mod_mse(y_true, y_pred):
     return tf.reduce_mean((y_true-y_pred)**2/(1-(y_true-y_pred)**2))
 
-def mod_acc(y_true,y_pred):
+def mod_accuracy(y_true,y_pred):
     return tf.reduce_mean(1-(y_true-y_pred)**2)
 
 
 model.compile(optimizer=Adam(learning_rate=learning_rate),
-              loss=mod_mse, metrics=[mod_acc])
+              loss=mod_mse, metrics=[mod_accuracy])
 
 model.fit(x, y, batch_size=batch_size, epochs=5, shuffle=True, callbacks=[
           tf.keras.callbacks.TensorBoard(log_dir="tf_logs/fit/"+datetime.now().strftime("%Y%m%d-%H%M%S"), update_freq=10)])

@@ -1,2 +1,4 @@
-neural network stuff/mnist data/mnist_train.csv
+machine_learning/mnist data/
+machine_learning/sentiment_model*
 discord_bot
+.vscode/

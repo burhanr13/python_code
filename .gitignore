@@ -1,4 +1,4 @@
-machine_learning/mnist data/
+machine_learning/mnist_data/
 machine_learning/sentiment_model*
 discord_bot
 .vscode/

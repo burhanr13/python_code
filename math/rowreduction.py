@@ -34,7 +34,7 @@ def solveSystem(a):
     i = 0
     for row in b:
         while i < len(row) and row[i] == 0:
-            free.append(i)
+            if i!=np.size(b,1)-1: free.append(i)
             i += 1
         if i >= len(row):
             break
@@ -42,6 +42,8 @@ def solveSystem(a):
             return None
         pivots.append(i)
         i += 1
+
+    free += range(pivots[-1]+1 if free == [] else max(pivots[-1],free[-1])+1, np.size(b,1))
     
     m = -b[:,free]
     m[:,-1] *= -1
@@ -59,15 +61,21 @@ def solveSystem(a):
 
 
 def randMat():
-    return np.random.randint(0, 20, (np.random.randint(1, 10), np.random.randint(1, 10)))
+    return np.random.randint(-20, 20, (np.random.randint(2, 10), np.random.randint(2, 10)))
 
 
-A = np.random.randint(-10, 10, (3, 4))
+#A = np.random.randint(-10, 10, (3, 4))
 
-A= np.array([[2,-2,1,-2,-2],[1,-1,-1,2,-1],[-1,1,2,-4,1],[3,-3,0,0,-3]])
+#A = np.array([[2,-2,1,-2,-2],[1,-1,-1,2,-1],[-1,1,2,-4,1],[3,-3,0,0,-3]])
+#A = randMat()
 
+#A = np.array([[1,2,1,0,1],[0,1,4,3,2],[0,0,2,2,4]])
+
+A = np.array([[1,0,3,7],[0,1,-4,1],[0,0,0,0]])
 
 print(A)
 print(np.round(reduce(A), 1))
 
-print(np.round(solveSystem(A), 1))
+sol = solveSystem(A)
+
+print(sol if sol is None else np.round(sol,1))

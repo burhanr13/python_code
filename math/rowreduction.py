@@ -5,7 +5,7 @@ def reduce(a: np.array):
     b = np.copy(a).astype(np.float64)
 
     i, j = 0, 0
-    while i < min(np.size(b, 0), np.size(b, 1)) and j < np.size(b, 0):
+    while i < np.size(b,1) and j < np.size(b, 0):
         k = j
         while b[k, i] == 0:
             k += 1
@@ -14,7 +14,7 @@ def reduce(a: np.array):
                 k = j
                 if i >= np.size(b, 1):
                     return b
-        b[j], b[k] = b[k], b[j]
+        b[[j,k]] = b[[k,j]]
 
         b[j] /= b[j, i]
         for m in range(np.size(b, 0)):
@@ -71,7 +71,11 @@ def randMat():
 
 #A = np.array([[1,2,1,0,1],[0,1,4,3,2],[0,0,2,2,4]])
 
-A = np.array([[1,0,3,7],[0,1,-4,1],[0,0,0,0]])
+#A = np.array([[1,0,3,7],[0,1,-4,1],[0,0,0,0]])
+
+A = np.array([[2,1,3,4,0,-1],
+              [-2,-1,-3,-4,5,6],
+              [4,2,7,6,1,-1]])
 
 print(A)
 print(np.round(reduce(A), 1))
